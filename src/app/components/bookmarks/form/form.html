@@ -1,0 +1,53 @@
+<h2>Create Bookmark</h2>
+<form class="form-horizontal"
+      name="bookmarkForm"
+      ng-submit="vm.submit(bookmarkForm)"
+      novalidate>
+  <div class="form-horizontal">
+    <div class="title">
+      <label class="field-label" for="formInputBookmarkTitle">Title:</label>
+      <div class="field">
+        <input bm-bookmark-title
+               ng-model="vm.bookmark.title"
+               type="text"
+               id="formInputBookmarkTitle"
+               ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 }}" >
+      </div>
+    </div>
+
+    <div class="url">
+      <label class="field-label" for="formInputBookmarkUrl">URL:</label>
+      <div class="field">
+        <input bm-bookmark-url
+               ng-model="vm.bookmark.url"
+               type="url"
+               id="formInputBookmarkUrl"
+               ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 }}" >
+      </div>
+    </div>
+
+    <div class="description">
+      <label class="field-label" for="formInputBookmarkDescription">Description:</label>
+      <div class="field">
+        <textarea bm-bookmark-description
+                  ng-model="vm.bookmark.description"
+                  type="text"
+                  id="formInputBookmarkDescription"
+                  rows="3"
+                  ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 }}" >
+        </textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="field">
+      <button type="submit" class="save-btn">
+        <span class="icon"></span> Save
+      </button>
+      <button type="reset" class="reset-btn" ng-click="vm.cancel(bookmarkForm)">
+        <span class="icon"></span> Cancel
+      </button>
+    </div>
+  </div>
+</form>

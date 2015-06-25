@@ -1,0 +1,52 @@
+bm-form {
+
+  .title,
+  .url,
+  .description {
+    .form-group;
+    .make-row();
+    .field-label {
+      .make-sm-column(2);
+    }
+    .field {
+      .make-sm-column(10);
+      input {
+        .form-control;
+      }
+      textarea {
+        .form-control;
+        .resizable(vertical);
+      }
+      .ng-submitted .ng-invalid,
+      .ng-dirty.ng-invalid {
+        border-color: rgba(255, 0, 0, 0.6);
+        &:focus {
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6)
+        }
+      }
+    }
+  }
+
+  .controls {
+    .make-row();
+    .field {
+      .make-sm-column-offset(2);
+      .make-sm-column(10);
+      .save-btn {
+        .btn; .btn-lg; .btn-primary;
+        .icon {
+          .glyphicon;
+          .glyphicon-ok;
+        }
+      }
+      .reset-btn {
+        .btn; .btn-lg; .btn-default;
+        .icon {
+          .glyphicon;
+          .glyphicon-remove;
+        }
+      }
+    }
+  }
+
+}
