@@ -5,7 +5,9 @@ export default function CardsGridDirective() {
     templateUrl: 'app/components/bookmarks/cards-grid/cards-grid.html',
     controller: ['Bookmarks.Service', 'Bookmarks.Select', CardsGridCtrl],
 
-    scope: {},
+    scope: {
+      bookmarks: '='
+    },
     controllerAs: 'vm',
     bindToController: true
   };
