@@ -24,6 +24,6 @@ angular.module('ngBookmarks', ['restangular', 'ngRoute', 'ui.bootstrap', 'bookma
   .service('githubContributor', GithubContributorService)
   .service('webDevTec', WebDevTecService)
   .controller('MainController', MainController)
-  .controller('BookmarksController', BookmarksController)
+  .controller('BookmarksController', ['Bookmarks.Service', BookmarksController])
   .directive('acmeNavbar', () => new NavbarDirective())
   .directive('acmeMalarkey', () => new MalarkeyDirective(malarkey));

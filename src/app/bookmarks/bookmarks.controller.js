@@ -1,4 +1,5 @@
 export default class BookmarksController {
-  constructor () {
+  constructor(bookmarks) {
+    this.bookmarks = bookmarks;
   }
 }

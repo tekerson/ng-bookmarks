@@ -7,9 +7,7 @@ function routerConfig ($routeProvider) {
       controllerAs: 'main'
     })
     .when('/bookmarks', {
-      templateUrl: 'app/bookmarks/bookmarks.html',
-      controller: 'BookmarksController',
-      controllerAs: 'ctrl'
+      templateUrl: 'app/bookmarks/bookmarks.html'
     })
     .otherwise({
       redirectTo: '/'
