@@ -1,15 +1,20 @@
-(function() {
-  'use strict';
+describe('MainController', () => {
 
-  describe('controllers', function(){
+  let ctrl;
 
-    beforeEach(module('ngBookmarks'));
+  beforeEach(angular.mock.module('ngBookmarks'));
 
-    it('should define more than 5 awesome things', inject(function($controller) {
-      var vm = $controller('MainController');
+  beforeEach(inject(($controller) => {
+    ctrl = $controller('MainController');
+  }));
 
-      expect(angular.isArray(vm.awesomeThings)).toBeTruthy();
-      expect(vm.awesomeThings.length > 5).toBeTruthy();
-    }));
+  it('should define more than 5 awesome things', () => {
+    expect(angular.isArray(ctrl.awesomeThings)).toBeTruthy();
+    expect(ctrl.awesomeThings.length > 5).toBeTruthy();
   });
-})();
+
+  it('should define the timestamp the project was created', () => {
+    expect(angular.isNumber(ctrl.creationDate)).toBeTruthy();
+  });
+
+});

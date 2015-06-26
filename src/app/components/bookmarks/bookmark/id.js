@@ -20,7 +20,7 @@ export function fromString(value) {
   if (isNaN(id)) {
     return Either.left('notNumber');
   }
-  return Either.right(new Id(value));
+  return Either.right(new Id(id));
 }
 
 export function assertType(obj) {

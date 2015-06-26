@@ -37,16 +37,31 @@ module.exports = function(config) {
       moduleName: 'ngBookmarks'
     },
 
+    webpack: {
+      devtool: 'inline-source-map',
+      module: {
+        loaders: [
+          { test: /\.js/, loader: 'babel-loader' }
+        ]
+      }
+    },
+    webpackMiddleware: {
+      noInfo: true
+    },
+
     browsers : ['PhantomJS'],
 
     plugins : [
       'karma-phantomjs-launcher',
       'karma-jasmine',
-      'karma-ng-html2js-preprocessor'
+      'karma-ng-html2js-preprocessor',
+      'karma-webpack',
+      'karma-sourcemap-loader'
     ],
 
     preprocessors: {
-      'src/**/*.html': ['ng-html2js']
+      'src/**/*.html': ['ng-html2js'],
+      'src/**/*.spec.js': ['webpack', 'sourcemap']
     }
   };
 
