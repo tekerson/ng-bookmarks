@@ -1,12 +1,13 @@
-import { Either } from './either';
-
 export var Validator = (key, pred) =>
   Object.freeze({
     key: key,
     pred: pred
   });
 
-export var validate = validators => input =>
-  validators.reduce((acc, validator) =>
-    acc.bind(() => validator.pred(input) ? acc : Either.left(validator.key)),
-    Either.right(input));
+export var errors = (validators, input) =>
+  validators.reduce((acc, validator) => {
+    if (!validator.pred(input)) {
+      acc.push(validator.key);
+    }
+    return acc;
+  }, []);

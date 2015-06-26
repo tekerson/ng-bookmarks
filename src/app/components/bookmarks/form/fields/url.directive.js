@@ -13,7 +13,7 @@ export default function fieldUrlDirective() {
 function linkFn(scope, element, attrs, ctrl) {
   if (ctrl === undefined) { return; }
 
-  ctrl.$parsers.push(value => Url.fromString(value).or(undefined));
+  ctrl.$parsers.push(value => Url.fromString(value) || undefined);
 
   validators.url.forEach(validator => {
     ctrl.$validators[validator.key] = v => !_.isUndefined(v) && validator.pred(v);

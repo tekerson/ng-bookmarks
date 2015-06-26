@@ -1,5 +1,3 @@
-import { Either } from '../../../../lib/tek/either';
-
 class Id {
   constructor(id) {
     this.id = id;
@@ -18,14 +16,12 @@ class Id {
 export function fromString(value) {
   let id = parseInt(value, 10);
   if (isNaN(id)) {
-    return Either.left('notNumber');
+    // throw new Error('notNumber');
+    return null;
   }
-  return Either.right(new Id(id));
+  return new Id(id);
 }
 
 export function assertType(obj) {
-  if (!(obj instanceof Id)) {
-    return Either.left('Type Error: Expected Id');
-  }
-  return Either.right(obj);
+  return obj instanceof Id;
 }

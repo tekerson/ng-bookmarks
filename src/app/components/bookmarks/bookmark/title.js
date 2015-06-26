@@ -1,7 +1,5 @@
 import _ from 'lodash';
 
-import { Either } from '../../../../lib/tek/either';
-
 class Title {
   constructor(title) {
     this.title = title;
@@ -19,14 +17,11 @@ class Title {
 
 export function fromString(value) {
   if (!_.isString(value)) {
-    return Either.left('notString');
+    return null;
   }
-  return Either.right(new Title(value));
+  return new Title(value);
 }
 
 export function assertType(obj) {
-  if (!(obj instanceof Title)) {
-    return Either.left('Type Error: Expected Title');
-  }
-  return Either.right(obj);
+  return obj instanceof Title;
 }

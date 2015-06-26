@@ -13,7 +13,7 @@ export default function fieldTitleDirective() {
 function linkFn(scope, element, attrs, ctrl) {
   if (ctrl === undefined) { return; }
 
-  ctrl.$parsers.push(value => Title.fromString(value).or(undefined));
+  ctrl.$parsers.push(value => Title.fromString(value) || undefined);
 
   validators.title.forEach(validator => {
     ctrl.$validators[validator.key] = v => !_.isUndefined(v) && validator.pred(v);

@@ -1,4 +1,4 @@
-import { Either } from '../../../lib/tek/either';
+import _ from 'lodash';
 import * as Bookmark from './bookmark/bookmark.entity';
 
 export default function BookmarksApiService(Restangular, $q) {
@@ -6,17 +6,19 @@ export default function BookmarksApiService(Restangular, $q) {
 
   this.list = () =>
     api.getList()
-      .then(rows => Either.rights(rows.map(Bookmark.fromJSON)));
+      .then(rows => rows.map(Bookmark.fromJSON).filter(Boolean));
 
   this.remove = (id) =>
     api.one(id).remove();
 
   this.create = (fields) => $q((resolve, reject) =>
     api.post(fields.toJSON())
-      .then(row => Bookmark.fromJSON(row).either(reject, resolve)));
+      .then(Bookmark.fromJSON)
+      .then(bookmark => _.isNull(bookmark) ? reject() : resolve(bookmark)));
 
   this.update = (id, fields) => $q((resolve, reject) =>
     api.one(id).customPUT(fields.toJSON())
-      .then(row => Bookmark.fromJSON(row).either(reject, resolve)));
+      .then(Bookmark.fromJSON)
+      .then(bookmark => _.isNull(bookmark) ? reject() : resolve(bookmark)));
 
 }

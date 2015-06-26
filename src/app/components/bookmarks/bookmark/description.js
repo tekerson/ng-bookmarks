@@ -1,7 +1,5 @@
 import _ from 'lodash';
 
-import { Either } from '../../../../lib/tek/either';
-
 class Description {
   constructor(description) {
     this.description = description;
@@ -19,14 +17,11 @@ class Description {
 
 export function fromString(value) {
   if (!_.isString(value)) {
-    return Either.left('notString');
+    return null;
   }
-  return Either.right(new Description(value));
+  return new Description(value);
 }
 
 export function assertType(obj) {
-  if (!(obj instanceof Description)) {
-    return Either.left('Type Error: Expected Description');
-  }
-  return Either.right(obj);
+  return obj instanceof Description;
 }
