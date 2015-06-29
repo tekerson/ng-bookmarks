@@ -8,7 +8,6 @@ export default function CardsGridDirective() {
     scope: {
       bookmarks: '='
     },
-    controllerAs: 'vm',
-    bindToController: true
+    controllerAs: 'vm'
   };
 }

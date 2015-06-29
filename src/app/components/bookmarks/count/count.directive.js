@@ -7,7 +7,6 @@ export default function countDirective() {
     },
     controller: () => {},
 
-    controllerAs: 'vm',
-    bindToController: true
+    controllerAs: 'vm'
   };
 }
