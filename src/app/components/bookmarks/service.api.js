@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import * as Bookmark from './bookmark/bookmark.entity';
 
 export default function BookmarksApiService(Restangular, $q) {
@@ -6,7 +5,7 @@ export default function BookmarksApiService(Restangular, $q) {
 
   this.list = () =>
     api.getList()
-      .then(rows => rows.map(Bookmark.fromJSON).filter(Boolean));
+      .then(rows => rows.map(Bookmark.fromJSON).filter(Bookmark.assertType));
 
   this.remove = (id) =>
     api.one(id).remove();
@@ -14,11 +13,11 @@ export default function BookmarksApiService(Restangular, $q) {
   this.create = (fields) => $q((resolve, reject) =>
     api.post(fields.toJSON())
       .then(Bookmark.fromJSON)
-      .then(bookmark => _.isNull(bookmark) ? reject() : resolve(bookmark)));
+      .then(bookmark => (bookmark instanceof Error ? reject : resolve)(bookmark)));
 
   this.update = (id, fields) => $q((resolve, reject) =>
     api.one(id).customPUT(fields.toJSON())
       .then(Bookmark.fromJSON)
-      .then(bookmark => _.isNull(bookmark) ? reject() : resolve(bookmark)));
+      .then(bookmark => (bookmark instanceof Error ? reject : resolve)(bookmark)));
 
 }

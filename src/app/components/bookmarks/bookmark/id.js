@@ -16,8 +16,7 @@ class Id {
 export function fromString(value) {
   let id = parseInt(value, 10);
   if (isNaN(id)) {
-    // throw new Error('notNumber');
-    return null;
+    return new Error('Invalid:NotNumeric');
   }
   return new Id(id);
 }

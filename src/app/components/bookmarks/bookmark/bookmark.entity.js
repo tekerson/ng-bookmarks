@@ -11,11 +11,11 @@ class Bookmark {
 
 function mkBookmark(id, fields) {
   if (!Id.assertType(id)) {
-    return null;
+    return new TypeError('Expected:Id');
   }
 
   if (!Fields.assertType(fields)) {
-    return null;
+    return new TypeError('Expected:Fields');
   }
 
   return new Bookmark(id, fields);
@@ -28,3 +28,7 @@ export var fromJSON = obj =>
 
 export var fromObject = obj =>
   mkBookmark(obj.id, obj.fields);
+
+export function assertType(obj) {
+  return obj instanceof Bookmark;
+}

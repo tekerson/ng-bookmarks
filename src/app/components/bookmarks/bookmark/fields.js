@@ -31,15 +31,15 @@ class BookmarkFields {
 
 function mkBookmarkFields(url, title, description) {
   if (!Url.assertType(url) || !_.isEmpty(errors(validators.url, url))) {
-    return null;
+    return new TypeError('Expected:Url');
   }
 
   if (!Title.assertType(title) || !_.isEmpty(errors(validators.title, title))) {
-    return null;
+    return new TypeError('Expected:Title');
   }
 
   if (!Description.assertType(description) || !_.isEmpty(errors(validators.description, description))) {
-    return null;
+    return new TypeError('Expected:Description');
   }
 
   return new BookmarkFields(url, title, description);

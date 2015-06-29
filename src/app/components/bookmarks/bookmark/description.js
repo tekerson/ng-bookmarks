@@ -17,7 +17,7 @@ class Description {
 
 export function fromString(value) {
   if (!_.isString(value)) {
-    return null;
+    return new TypeError('Expected:String');
   }
   return new Description(value);
 }

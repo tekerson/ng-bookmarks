@@ -19,11 +19,11 @@ class Url {
 
 export function fromString(value) {
   if (!_.isString(value)) {
-    return null;
+    return new TypeError('Expected:String');
   }
   let [protocol, rest] = value.split('://', 2);
   if (_.isEmpty(rest)) {
-    return null;
+    return new Error('Invalid:NoDomain');
   }
   let [domain, path] = rest.split('/', 2);
   return new Url(protocol, domain, path || '');

@@ -11,8 +11,8 @@ describe('The `id` module', () => {
     expect(Id.assertType('123')).toBeFalsy();
   });
 
-  it('will return undefined when a value cannot be created', () => {
-    expect(Id.fromString('abc')).toBeNull();
+  it('will return an Error when a value cannot be created', () => {
+    expect(Id.fromString('abc')).toBeError('Invalid:NotNumeric');
   });
 
 });
