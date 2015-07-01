@@ -1,6 +1,7 @@
 <button class="refresh-btn" ng-click="vm.refresh()"></button>
 <button class="reverse-btn" ng-click="vm.reverse()"></button>
 <div class="bookmark-card-list clearfix">
+  <div ng-if="!bookmarks.length">No Bookmarks Found</div>
   <div class="bookmark-card col-sm-6 col-md-4"
        ng-repeat="bookmark in bookmarks
                  | orderBy:'fields.title':vm.isReversed track by bookmark.id"
