@@ -1,26 +1,26 @@
-import service from './bookmarks.service';
-import selectorService from './bookmarks.selector';
-import api from './bookmarks.api';
+import Service from './bookmarks.service';
+import SelectorService from './bookmarks.selector';
+import Api from './bookmarks.api';
 
-import cardsGridDirective from './cards-grid/cards-grid.directive';
-import countDirective from './count/count.directive';
-import formDirective from './form/form.directive';
+import CardsGridDirective from './cards-grid/cards-grid.directive';
+import CountDirective from './count/count.directive';
+import FormDirective from './form/form.directive';
 
-import fieldDescriptionDirective from './form/fields/description.directive';
-import fieldTitleDirective from './form/fields/title.directive';
-import fieldUrlDirective from './form/fields/url.directive';
+import FieldDescriptionDirective from './form/fields/description.directive';
+import FieldTitleDirective from './form/fields/title.directive';
+import FieldUrlDirective from './form/fields/url.directive';
 
 import BookmarksController from './bookmarks.controller';
 
 export default angular.module('bookmarks', ['restangular'])
   .service('bookmarksService',
-      ['bookmarksApi', service])
+      ['bookmarksApi', Service])
 
   .service('bookmarksSelector',
-      ['eventBus', selectorService])
+      ['eventBus', SelectorService])
 
   .service('bookmarksApi',
-      ['Restangular', '$q', api])
+      ['Restangular', '$q', Api])
 
   .factory('eventBus', ['$rootScope', (v) => v])
 
@@ -30,11 +30,11 @@ export default angular.module('bookmarks', ['restangular'])
 
   .controller('BookmarksController', ['bookmarksService', BookmarksController])
 
-  .directive('bmCards', cardsGridDirective)
-  .directive('bmCount', countDirective)
-  .directive('bmForm', formDirective)
+  .directive('bmCards', CardsGridDirective)
+  .directive('bmCount', CountDirective)
+  .directive('bmForm', FormDirective)
 
-  .directive('bmBookmarkDescription', fieldDescriptionDirective)
-  .directive('bmBookmarkTitle', fieldTitleDirective)
-  .directive('bmBookmarkUrl', fieldUrlDirective)
+  .directive('bmBookmarkDescription', FieldDescriptionDirective)
+  .directive('bmBookmarkTitle', FieldTitleDirective)
+  .directive('bmBookmarkUrl', FieldUrlDirective)
 ;
