@@ -10,7 +10,7 @@ import GithubContributorService from '../app/components/githubContributor/github
 import WebDevTecService from '../app/components/webDevTec/webDevTec.service';
 import NavbarDirective from '../app/components/navbar/navbar.directive';
 import MalarkeyDirective from '../app/components/malarkey/malarkey.directive';
-import '../app/components/bookmarks/bookmarks.module';
+import './bookmarks/bookmarks.module';
 
 angular.module('ngBookmarks', ['restangular', 'ngRoute', 'ui.bootstrap', 'bookmarks'])
   .constant('malarkey', malarkey)
@@ -24,6 +24,6 @@ angular.module('ngBookmarks', ['restangular', 'ngRoute', 'ui.bootstrap', 'bookma
   .service('githubContributor', GithubContributorService)
   .service('webDevTec', WebDevTecService)
   .controller('MainController', MainController)
-  .controller('BookmarksController', ['Bookmarks.Service', BookmarksController])
+  .controller('BookmarksController', ['bookmarksService', BookmarksController])
   .directive('acmeNavbar', () => new NavbarDirective())
   .directive('acmeMalarkey', () => new MalarkeyDirective(malarkey));

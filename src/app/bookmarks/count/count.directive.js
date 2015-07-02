@@ -1,6 +1,6 @@
 export default function countDirective() {
   return {
-    templateUrl: 'app/components/bookmarks/count/count.html',
+    templateUrl: 'app/bookmarks/count/count.html',
     restrict: 'E',
     scope: {
       bookmarks: '='

@@ -1,6 +1,6 @@
 import validators from './validators';
 
-import { errors } from '../../../../lib/tek/validate';
+import { errors } from '../../../lib/tek/validate';
 import * as Title from './title';
 import * as Url from './url';
 import * as Description from './description';

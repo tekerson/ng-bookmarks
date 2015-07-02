@@ -1,6 +1,6 @@
-import Service from './service';
-import SelectService from './select.service';
-import Api from './service.api';
+import service from './bookmarks.service';
+import selectorService from './bookmarks.selector';
+import api from './bookmarks.api';
 
 import cardsGridDirective from './cards-grid/cards-grid.directive';
 import countDirective from './count/count.directive';
@@ -11,16 +11,16 @@ import fieldTitleDirective from './form/fields/title.directive';
 import fieldUrlDirective from './form/fields/url.directive';
 
 export default angular.module('bookmarks', ['restangular'])
-  .service('Bookmarks.Service',
-      ['Bookmarks.Api', Service])
+  .service('bookmarksService',
+      ['bookmarksApi', service])
 
-  .service('Bookmarks.Select',
-      ['EventBus', SelectService])
+  .service('bookmarksSelector',
+      ['eventBus', selectorService])
 
-  .service('Bookmarks.Api',
-      ['Restangular', '$q', Api])
+  .service('bookmarksApi',
+      ['Restangular', '$q', api])
 
-  .factory('EventBus', ['$rootScope', (v) => v])
+  .factory('eventBus', ['$rootScope', (v) => v])
 
   .config(['RestangularProvider', function (Restangular) {
     Restangular.setBaseUrl('http://localhost:3002');

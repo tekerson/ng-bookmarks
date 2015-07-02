@@ -1,7 +1,7 @@
 export default class CardsGridCtrl {
-  constructor(BookmarksService, SelectService) {
-    this.bookmarkService = BookmarksService;
-    this.selected = SelectService;
+  constructor(bookmarksService, selectorService) {
+    this.bookmarkService = bookmarksService;
+    this.selected = selectorService;
 
     this.isReversed = false;
   }
