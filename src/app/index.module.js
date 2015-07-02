@@ -11,7 +11,7 @@ import NavbarDirective from '../app/components/navbar/navbar.directive';
 import MalarkeyDirective from '../app/components/malarkey/malarkey.directive';
 import './bookmarks/bookmarks.module';
 
-angular.module('ngBookmarks', ['restangular', 'ngRoute', 'ui.bootstrap', 'bookmarks'])
+angular.module('ngBookmarks', ['ngRoute', 'ui.bootstrap', 'bookmarks'])
   .constant('malarkey', malarkey)
   .constant('toastr', toastr)
   .constant('moment', moment)
