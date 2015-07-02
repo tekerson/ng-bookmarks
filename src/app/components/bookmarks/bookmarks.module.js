@@ -26,10 +26,6 @@ export default angular.module('bookmarks', ['restangular'])
     Restangular.setBaseUrl('http://localhost:3002');
   }])
 
-  .run(['Bookmarks.Service', '$q', (BookmarksService) => {
-    BookmarksService.list();
-  }])
-
   .directive('bmCards', cardsGridDirective)
   .directive('bmCount', countDirective)
   .directive('bmForm', formDirective)
