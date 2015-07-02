@@ -3,7 +3,7 @@ export default function shellDirective() {
     templateUrl: 'app/layout/shell.html',
     restrict: 'EA',
     transclude: true,
-    scope: true,
+    scope: {},
     controller: 'ShellController',
     controllerAs: 'vm'
   };
