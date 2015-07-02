@@ -9,9 +9,11 @@ import GithubContributorService from '../app/components/githubContributor/github
 import WebDevTecService from '../app/components/webDevTec/webDevTec.service';
 import NavbarDirective from '../app/components/navbar/navbar.directive';
 import MalarkeyDirective from '../app/components/malarkey/malarkey.directive';
+
+import './templates.module';
 import './bookmarks/bookmarks.module';
 
-angular.module('ngBookmarks', ['ngRoute', 'ui.bootstrap', 'bookmarks'])
+angular.module('ngBookmarks', ['templates', 'ngRoute', 'ui.bootstrap', 'bookmarks'])
   .constant('malarkey', malarkey)
   .constant('toastr', toastr)
   .constant('moment', moment)

@@ -10,7 +10,7 @@ describe('The `cards-grid` directive', () => {
     return el;
   }
 
-  beforeEach(angular.mock.module('ngBookmarks'));
+  beforeEach(angular.mock.module('bookmarks', 'templates'));
 
   beforeEach(inject(($compile, $rootScope) => {
     scope = $rootScope.$new();
