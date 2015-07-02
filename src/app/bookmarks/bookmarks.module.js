@@ -10,6 +10,8 @@ import fieldDescriptionDirective from './form/fields/description.directive';
 import fieldTitleDirective from './form/fields/title.directive';
 import fieldUrlDirective from './form/fields/url.directive';
 
+import BookmarksController from './bookmarks.controller';
+
 export default angular.module('bookmarks', ['restangular'])
   .service('bookmarksService',
       ['bookmarksApi', service])
@@ -25,6 +27,8 @@ export default angular.module('bookmarks', ['restangular'])
   .config(['RestangularProvider', function (Restangular) {
     Restangular.setBaseUrl('http://localhost:3002');
   }])
+
+  .controller('BookmarksController', ['bookmarksService', BookmarksController])
 
   .directive('bmCards', cardsGridDirective)
   .directive('bmCount', countDirective)
