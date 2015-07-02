@@ -1,0 +1,14 @@
+{
+  "name": "tek",
+  "version": "1.0.0",
+  "description": "A Collection of Libs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Brenton Alker",
+    "email": "brenton@tekerson.com"
+  },
+  "license": "MIT"
+}

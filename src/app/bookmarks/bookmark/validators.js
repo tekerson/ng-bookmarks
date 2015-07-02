@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { Validator } from '../../../lib/tek/validate';
+import { Validator } from 'tek/validate';
 
 export default {
   title: [

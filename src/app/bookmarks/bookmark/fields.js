@@ -4,7 +4,7 @@ import * as Url from './url';
 import * as Title from './title';
 import * as Description from './description';
 import validators from './validators';
-import { errors } from '../../../lib/tek/validate';
+import { errors } from 'tek/validate';
 export { Url, Title, Description, validators };
 
 class BookmarkFields {
