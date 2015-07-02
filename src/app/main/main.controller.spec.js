@@ -13,8 +13,4 @@ describe('MainController', () => {
     expect(ctrl.awesomeThings.length > 5).toBeTruthy();
   });
 
-  it('should define the timestamp the project was created', () => {
-    expect(angular.isNumber(ctrl.creationDate)).toBeTruthy();
-  });
-
 });

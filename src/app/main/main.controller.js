@@ -4,7 +4,6 @@ class MainController {
 
     this.awesomeThings = [];
     this.classAnimation = '';
-    this.creationDate = 1435235800405;
     this.toastr = toastr;
 
     this.activate($timeout, webDevTec);
