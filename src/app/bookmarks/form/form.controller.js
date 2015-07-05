@@ -1,14 +1,22 @@
 import * as Fields from '../bookmark/fields';
 
 export default class FormCtrl {
-  constructor (bookmarksService, selectService, events) {
+  constructor (bookmarksService, selectService, scope) {
     this.bookmarkService = bookmarksService;
     this.selectService = selectService;
 
-    events.$on(selectService.selectedSubject, (ev, selected) => {
+    let selectedDeregister = selectService.onSelect(selected => {
       this.selected = selected;
-      this.bookmark = (selected === undefined) ? {} : selected.fields.toObject();
+      this.bookmark = selected.fields.toObject();
     });
+
+    let deselectedDeregister = selectService.onDeselect(() => {
+      this.selected = undefined;
+      this.bookmark = {};
+    });
+
+    scope.$on('$destroy', selectedDeregister);
+    scope.$on('$destroy', deselectedDeregister);
   }
 
   submit (form) {

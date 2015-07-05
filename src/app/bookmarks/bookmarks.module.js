@@ -17,12 +17,10 @@ export default angular.module('bookmarks', ['restangular'])
       ['bookmarksApi', Service])
 
   .service('bookmarksSelector',
-      ['eventBus', SelectorService])
+      [SelectorService])
 
   .service('bookmarksApi',
       ['Restangular', '$q', Api])
-
-  .factory('eventBus', ['$rootScope', (v) => v])
 
   .config(['RestangularProvider', function (Restangular) {
     Restangular.setBaseUrl('http://localhost:3002');
