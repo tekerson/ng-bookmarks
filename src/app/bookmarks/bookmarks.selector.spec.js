@@ -14,6 +14,7 @@ describe('The bookmark selector service', () => {
     });
 
     it('remembers the selected object', () => {
+      expect(selector.selected).toBe(selected);
       expect(selector.isSelected(selected)).toBe(true);
     });
 
@@ -28,55 +29,9 @@ describe('The bookmark selector service', () => {
       });
 
       it('does NOT remember previously selected object', () => {
+        expect(selector.selected).toBe(undefined);
         expect(selector.isSelected(selected)).toBe(false);
       });
-
     });
-  });
-
-  describe('when a selected callback has been registered', () => {
-    let callback, deregister;
-
-    beforeEach(() => {
-      callback = jasmine.createSpy('callback');
-      deregister = selector.onSelect(callback);
-    });
-
-    it('calls the callback when an object is selected', () => {
-      selector.select(selected);
-
-      expect(callback).toHaveBeenCalledWith(selected);
-    });
-
-    it('does NOT call the callback if the registration is deregistered', () => {
-      deregister();
-      selector.select(selected);
-
-      expect(callback).not.toHaveBeenCalled();
-    });
-
-  });
-
-  describe('when a deselected callback has been registered', () => {
-    let callback, deregister;
-
-    beforeEach(() => {
-      callback = jasmine.createSpy('callback');
-      deregister = selector.onDeselect(callback);
-    });
-
-    it('calls the callback when an object is deselected', () => {
-      selector.deselect();
-
-      expect(callback).toHaveBeenCalled();
-    });
-
-    it('does NOT call the callback if the registration is deregistered', () => {
-      deregister();
-      selector.deselect();
-
-      expect(callback).not.toHaveBeenCalled();
-    });
-
   });
 });

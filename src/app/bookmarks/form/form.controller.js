@@ -5,18 +5,13 @@ export default class FormCtrl {
     this.bookmarkService = bookmarksService;
     this.selectService = selectService;
 
-    let selectedDeregister = selectService.onSelect(selected => {
-      this.selected = selected;
-      this.bookmark = selected.fields.toObject();
+    scope.$watch(() => selectService.selected, selected => {
+      if (selected === undefined) {
+        this.bookmark = {};
+      } else {
+        this.bookmark = selected.fields.toObject();
+      }
     });
-
-    let deselectedDeregister = selectService.onDeselect(() => {
-      this.selected = undefined;
-      this.bookmark = {};
-    });
-
-    scope.$on('$destroy', selectedDeregister);
-    scope.$on('$destroy', deselectedDeregister);
   }
 
   submit (form) {
@@ -26,8 +21,8 @@ export default class FormCtrl {
 
     let result;
     let fields = Fields.fromObject(this.bookmark);
-    if (this.selected) {
-      result = this.bookmarkService.update(this.selected.id, fields);
+    if (this.selectService.selected) {
+      result = this.bookmarkService.update(this.selectService.selected.id, fields);
     } else {
       result = this.bookmarkService.create(fields);
     }
