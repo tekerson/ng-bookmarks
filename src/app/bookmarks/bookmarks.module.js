@@ -1,3 +1,5 @@
+import 'angular-messages';
+
 import Service from './bookmarks.service';
 import SelectorService from './bookmarks.selector';
 import Api from './bookmarks.api';
@@ -12,7 +14,7 @@ import FieldUrlDirective from './form/fields/url.directive';
 
 import BookmarksController from './bookmarks.controller';
 
-export default angular.module('bookmarks', ['restangular'])
+export default angular.module('bookmarks', ['restangular', 'ngMessages'])
   .service('bookmarksService',
       ['bookmarksApi', Service])
 
