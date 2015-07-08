@@ -1,24 +1,22 @@
 <button class="refresh-btn" ng-click="vm.refresh()"></button>
 <button class="reverse-btn" ng-click="vm.reverse()"></button>
-<div class="bookmark-card-list clearfix">
+<div class="bookmark-card-list">
   <div ng-if="!bookmarks.length">No Bookmarks Found</div>
-  <div class="bookmark-card col-sm-6 col-md-4"
+  <div class="bookmark-card"
        ng-repeat="bookmark in bookmarks
                  | orderBy:'fields.title':vm.isReversed track by bookmark.id"
        ng-class="{ 'selected': vm.selected.isSelected(bookmark) }">
-    <div class="thumbnail">
+    <div class="content">
       <button class="delete-btn" ng-click="vm.remove(bookmark.id)"></button>
       <button class="edit-btn" ng-click="vm.select(bookmark)"></button>
-      <div class="caption">
-        <h3>
-          <span class="list-index" ng-bind="$index + 1"></span>
-          {{bookmark.fields.title.toString()}}
-        </h3>
-        <p ng-bind="bookmark.fields.description">??</p>
-        <p>
-          <a ng-href="{{bookmark.fields.url.toString()}}"
-             ng-bind="bookmark.fields.url">??</a></p>
-      </div>
+      <h3>
+        <span class="list-index" ng-bind="$index + 1"></span>
+        {{bookmark.fields.title.toString()}}
+      </h3>
+      <p ng-bind="bookmark.fields.description">??</p>
+      <p>
+      <a ng-href="{{bookmark.fields.url.toString()}}"
+        ng-bind="bookmark.fields.url">??</a></p>
     </div>
   </div>
 </div>

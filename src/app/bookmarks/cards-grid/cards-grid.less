@@ -1,6 +1,16 @@
 bm-cards {
+  .bookmark-card-list {
+    .make-row();
+  }
   .bookmark-card {
-    &.selected .thumbnail {
+    .make-sm-column(6);
+    .make-md-column(4);
+    .content {
+      .thumbnail;
+      height: 200px;
+      padding: 10px;
+    }
+    &.selected .content {
       border-color: red;
     }
   }
