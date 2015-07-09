@@ -7,7 +7,7 @@ export default class FormCtrl {
 
     scope.$watch(() => selectService.selected, selected => {
       if (selected === undefined) {
-        this.bookmark = {};
+        this.bookmark = mkEmptyFields();
       } else {
         this.bookmark = selected.fields.toObject();
       }
@@ -32,8 +32,16 @@ export default class FormCtrl {
 
   cancel (form) {
     this.selectService.deselect();
-    this.bookmark = {};
+    this.bookmark = mkEmptyFields();
     form.$setPristine();
   }
 
+}
+
+function mkEmptyFields () {
+  return {
+    'title': undefined,
+    'url': undefined,
+    'description': Fields.Description.fromString('')
+  };
 }

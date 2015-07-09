@@ -13,7 +13,7 @@ export default function fieldDescriptionDirective() {
 function linkFn(scope, elements, attrs, ctrl) {
   if (ctrl === undefined) { return; }
 
-  ctrl.$parsers.push(value => Description.fromString(value) || undefined);
+  ctrl.$parsers.push(value => Description.fromString(value));
 
   validators.description.forEach(validator => {
     ctrl.$validators[validator.key] = v => !_.isUndefined(v) && validator.pred(v);
