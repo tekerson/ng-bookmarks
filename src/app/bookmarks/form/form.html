@@ -12,11 +12,13 @@
                type="text"
                id="formInputBookmarkTitle"
                name="title"
+               required
                ng-model-options="{ updateOn: 'default blur', debounce: { default: 300, blur: 0 }}" >
       </div>
       <div class="field-messages"
            ng-messages="bookmarkForm.title.$error"
-           ng-if="bookmarkForm.title.$dirty && bookmarkForm.title.$invalid" role="alert">
+           ng-if="vm.showErrors(bookmarkForm, bookmarkForm.title)" role="alert">
+        <div ng-message="required"><span class="icon"></span> Must enter a value</div>
         <div ng-message="initCap"><span class="icon"></span> Must start with upper-case character</div>
         <div ng-message="length"><span class="icon"></span> Must be at least 3 characters long</div>
       </div>
@@ -27,15 +29,17 @@
       <div class="field">
         <input bm-bookmark-url
                ng-model="vm.bookmark.url"
-               type="url"
+               type="text"
                id="formInputBookmarkUrl"
                name="url"
+               required
                ng-model-options="{ updateOn: 'default blur', debounce: { default: 300, blur: 0 }}" >
       </div>
       <div class="field-messages"
            ng-messages="bookmarkForm.url.$error"
-           ng-if="bookmarkForm.url.$dirty && bookmarkForm.url.$invalid" role="alert">
-        <div ng-message="url"><span class="icon"></span> Must be a fully qualified URL</div>
+           ng-if="vm.showErrors(bookmarkForm, bookmarkForm.url)" role="alert">
+        <div ng-message="required"><span class="icon"></span> Must enter a value</div>
+        <div ng-message="parse"><span class="icon"></span> Must be a fully qualified URL</div>
         <div ng-message="protocol"><span class="icon"></span> Must be a http or https</div>
       </div>
     </div>

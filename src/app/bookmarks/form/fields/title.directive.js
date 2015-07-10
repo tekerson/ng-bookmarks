@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { Title, validators } from '../../bookmark/fields';
+import { Title, validators, handleError } from '../../bookmark/fields';
 
 export default function fieldTitleDirective() {
   return {
@@ -13,11 +13,17 @@ export default function fieldTitleDirective() {
 function linkFn(scope, element, attrs, ctrl) {
   if (ctrl === undefined) { return; }
 
-  ctrl.$parsers.push(value => Title.fromString(value) || undefined);
+  ctrl.$render = () => {
+    if (_.isUndefined(ctrl.$viewValue)) {
+      ctrl.$setViewValue('');
+    }
+  };
+
+  ctrl.$parsers.push(raw => handleError(Title.fromString(raw), () => undefined));
 
   validators.title.forEach(validator => {
-    ctrl.$validators[validator.key] = v => !_.isUndefined(v) && validator.pred(v);
+    ctrl.$validators[validator.key] = v => Title.assertType(v) && validator.pred(v);
   });
 
-  ctrl.$formatters.push(value => value && value.toString());
+  ctrl.$formatters.push(value => Title.assertType(value) ? value.toString() : '');
 }

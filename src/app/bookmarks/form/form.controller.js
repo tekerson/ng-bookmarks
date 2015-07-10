@@ -36,12 +36,15 @@ export default class FormCtrl {
     form.$setPristine();
   }
 
+  showErrors (form, field) {
+    return (form.$submitted || field.$dirty) && field.$invalid;
+  }
 }
 
 function mkEmptyFields () {
   return {
-    'title': undefined,
-    'url': undefined,
+    'title': Fields.Title.fromString(''),
+    'url': Fields.Url.fromString(''),
     'description': Fields.Description.fromString('')
   };
 }

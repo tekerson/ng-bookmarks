@@ -1,5 +1,12 @@
 bm-form {
 
+  .invalid() {
+    border-color: rgba(255, 0, 0, 0.6);
+    &:focus {
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6)
+    }
+  }
+
   .title,
   .url,
   .description {
@@ -18,12 +25,8 @@ bm-form {
         .resizable(vertical);
         height: 75px;
       }
-      .ng-submitted .ng-invalid,
       .ng-dirty.ng-invalid {
-        border-color: rgba(255, 0, 0, 0.6);
-        &:focus {
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6)
-        }
+        .invalid;
       }
     }
     .field-messages {
@@ -36,6 +39,9 @@ bm-form {
         .glyphicon-alert;
       }
     }
+  }
+  .ng-submitted .field .ng-invalid {
+    .invalid;
   }
 
   .controls {
