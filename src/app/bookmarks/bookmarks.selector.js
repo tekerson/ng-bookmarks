@@ -1,18 +1,15 @@
-export default class BookmarksSelector {
-  constructor() {
-    this.selected = undefined;
-  }
+export default function BookmarksSelector() {
+  this.selected = undefined;
 
-  select(bookmark) {
+  this.select = (bookmark) => {
     this.selected = bookmark;
-  }
+  };
 
-  deselect() {
+  this.deselect = () => {
     this.selected = undefined;
-  }
+  };
 
-  isSelected(bookmark) {
+  this.isSelected = (bookmark) => {
     return this.selected === bookmark;
-  }
-
+  };
 }
