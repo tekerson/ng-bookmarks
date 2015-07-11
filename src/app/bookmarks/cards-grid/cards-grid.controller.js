@@ -1,24 +1,19 @@
-export default class CardsGridCtrl {
-  constructor(bookmarksService, selectorService) {
-    this.bookmarkService = bookmarksService;
-    this.selected = selectorService;
+export default function CardsGridCtrl(bookmarks, selector) {
+  this.isReversed = false;
 
-    this.isReversed = false;
-  }
-
-  reverse() {
+  this.reverse = () => {
     this.isReversed = !this.isReversed;
-  }
+  };
 
-  refresh() {
-    this.bookmarkService.list();
-  }
+  this.refresh = () => {
+    bookmarks.list();
+  };
 
-  remove(id) {
-    this.bookmarkService.remove(id);
-  }
+  this.remove = (id) => {
+    bookmarks.remove(id);
+  };
 
-  select(bookmark) {
-    this.selected.select(bookmark);
-  }
+  this.select = (bookmark) => {
+    selector.select(bookmark);
+  };
 }
