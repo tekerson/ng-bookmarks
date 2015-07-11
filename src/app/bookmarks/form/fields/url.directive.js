@@ -1,29 +1,11 @@
-import _ from 'lodash';
+import { Url, validators } from '../../bookmark/fields';
 
-import { Url, validators, handleError } from '../../bookmark/fields';
+import link from './link';
 
 export default function fieldUrlDirective() {
   return {
     restrict: 'A',
     require: '?ngModel',
-    link: linkFn
+    link: link(Url.fromString, Url.assertType, validators.url)
   };
-}
-
-function linkFn(scope, element, attrs, ctrl) {
-  if (ctrl === undefined) { return; }
-
-  ctrl.$render = () => {
-    if (_.isUndefined(ctrl.$viewValue)) {
-      ctrl.$setViewValue('');
-    }
-  };
-
-  ctrl.$parsers.push(raw => handleError(Url.fromString(raw), () => undefined));
-
-  validators.url.forEach(validator => {
-    ctrl.$validators[validator.key] = v => Url.assertType(v) && validator.pred(v);
-  });
-
-  ctrl.$formatters.push(value => Url.assertType(value) ? value.toString() : '');
 }

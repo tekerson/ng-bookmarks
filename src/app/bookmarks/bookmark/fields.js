@@ -57,10 +57,3 @@ export var fromJSON = obj =>
 export function assertType(obj) {
   return obj instanceof BookmarkFields;
 }
-
-export function handleError(value, onError) {
-  if (value instanceof Error) {
-    return onError(value);
-  }
-  return value;
-}

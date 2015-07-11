@@ -1,29 +1,11 @@
-import _ from 'lodash';
+import { Description, validators } from '../../bookmark/fields';
 
-import { Description, validators, handleError } from '../../bookmark/fields';
+import link from './link';
 
 export default function fieldDescriptionDirective() {
   return {
     restrict: 'A',
     require: '?ngModel',
-    link: linkFn
+    link: link(Description.fromString, Description.assertType, validators.description)
   };
-}
-
-function linkFn(scope, elements, attrs, ctrl) {
-  if (ctrl === undefined) { return; }
-
-  ctrl.$render = () => {
-    if (_.isUndefined(ctrl.$viewValue)) {
-      ctrl.$setViewValue('');
-    }
-  };
-
-  ctrl.$parsers.push(raw => handleError(Description.fromString(raw), () => undefined));
-
-  validators.description.forEach(validator => {
-    ctrl.$validators[validator.key] = v => Description.assertType(v) && validator.pred(v);
-  });
-
-  ctrl.$formatters.push(value => Description.assertType(value) ? value.toString() : '');
 }
