@@ -4,7 +4,7 @@
   <div ng-if="!bookmarks.length">No Bookmarks Found</div>
   <div class="bookmark-card"
        ng-repeat="bookmark in bookmarks
-                 | orderBy:'fields.title':vm.isReversed track by bookmark.id"
+                 | orderBy:'fields.title':vm.isReversed() track by bookmark.id"
        ng-class="{ 'selected': vm.isSelected(bookmark) }">
     <div class="content">
       <button class="delete-btn" ng-click="vm.remove(bookmark.id)"></button>

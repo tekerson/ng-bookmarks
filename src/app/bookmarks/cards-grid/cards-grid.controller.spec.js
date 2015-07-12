@@ -15,20 +15,20 @@ describe('The `CardsGrid` controller', () => {
   });
 
   it('is not reversed by default', () => {
-    expect(ctrl.isReversed).toBe(false);
+    expect(ctrl.isReversed()).toBe(false);
   });
 
   it('changes to reversed when `reverse` is called', () => {
     ctrl.reverse();
 
-    expect(ctrl.isReversed).toBe(true);
+    expect(ctrl.isReversed()).toBe(true);
   });
 
   it('alternates back to not reversed', () => {
     ctrl.reverse();
     ctrl.reverse();
 
-    expect(ctrl.isReversed).toBe(false);
+    expect(ctrl.isReversed()).toBe(false);
   });
 
   it('refreshes the bookmarks', () => {

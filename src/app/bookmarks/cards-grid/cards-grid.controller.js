@@ -1,8 +1,10 @@
 export default function CardsGridCtrl(bookmarks, selector) {
-  this.isReversed = false;
+  let reversed = false;
+
+  this.isReversed = () => reversed;
 
   this.reverse = () => {
-    this.isReversed = !this.isReversed;
+    reversed = !reversed;
   };
 
   this.refresh = bookmarks.list;
