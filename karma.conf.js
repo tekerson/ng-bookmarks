@@ -14,6 +14,7 @@ function listFiles() {
 
   return wiredep(wiredepOptions).js
     .concat([
+      path.join(conf.paths.src, '/../node_modules/phantomjs-polyfill/bind-polyfill.js'),
       path.join(conf.paths.tmp, '/serve/app/index.module.js'),
       path.join(conf.paths.src, '/lib/test/jasmine_matchers.js'),
       path.join(conf.paths.src, '/**/*.spec.js'),

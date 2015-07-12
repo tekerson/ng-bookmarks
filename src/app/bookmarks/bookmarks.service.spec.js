@@ -4,31 +4,25 @@ import * as Bookmark from './bookmark/bookmark.entity';
 import * as Fields from './bookmark/fields';
 import * as Id from './bookmark/id';
 
+import Q from 'q';
+
 describe('The Bookmarks service', () => {
   let bookmarks, api;
-
-  let $q, $rootScope;
-  beforeEach(angular.mock.module('bookmarks'));
-  beforeEach(inject((_$q_, _$rootScope_) => {
-    $q = _$q_;
-    $rootScope = _$rootScope_;
-  }));
 
   beforeEach(() => {
     api = jasmine.createSpyObj('Api',
         ['list', 'create', 'remove', 'update']);
     bookmarks = new Bookmarks(api);
 
-    api.list.and.returnValue($q.resolve([]));
-    api.create.and.callFake((fields) => $q.resolve(mkBookmark(undefined, fields)));
-    api.update.and.callFake((id, fields) => $q.resolve(mkBookmark(id, fields)));
-    api.remove.and.returnValue($q.resolve());
+    api.list.and.returnValue(Q([]));
+    api.create.and.callFake((fields) => Q(mkBookmark(undefined, fields)));
+    api.update.and.callFake((id, fields) => Q(mkBookmark(id, fields)));
+    api.remove.and.returnValue(Q());
   });
 
   describe('when the API has no bookmarks', () => {
     beforeEach(() => {
       bookmarks.list();
-      $rootScope.$digest();
     });
 
     it('there are no bookmarks', () => {
@@ -37,11 +31,11 @@ describe('The Bookmarks service', () => {
 
     describe('creating a bookmark', () => {
       let fields;
-      beforeEach(() => {
+      beforeEach((done) => {
         fields = mkFields();
 
-        bookmarks.create(fields);
-        $rootScope.$digest();
+        bookmarks.create(fields)
+          .then(done);
       });
 
       it('adds the bookmark to the bookmarks', () => {
@@ -52,11 +46,11 @@ describe('The Bookmarks service', () => {
 
   describe('when the API has bookmarks', () => {
     let bookmark;
-    beforeEach(() => {
+    beforeEach((done) => {
       bookmark = mkBookmark();
-      api.list.and.returnValue($q.resolve([bookmark]));
-      bookmarks.list();
-      $rootScope.$digest();
+      api.list.and.returnValue(Q([bookmark]));
+      bookmarks.list()
+        .done(done);
     });
 
     it('there are bookmarks', () => {
@@ -64,9 +58,9 @@ describe('The Bookmarks service', () => {
     });
 
     describe('removing a bookmark', () => {
-      beforeEach(() => {
-        bookmarks.remove(bookmark.id);
-        $rootScope.$digest();
+      beforeEach((done) => {
+        bookmarks.remove(bookmark.id)
+          .done(done);
       });
 
       it('removes it from the bookmarks', () => {
@@ -76,10 +70,10 @@ describe('The Bookmarks service', () => {
 
     describe('updating a bookmark', () => {
       let fields;
-      beforeEach(() => {
+      beforeEach((done) => {
         fields = mkFields();
-        bookmarks.update(bookmark.id, fields);
-        $rootScope.$digest();
+        bookmarks.update(bookmark.id, fields)
+          .done(done);
       });
       it('updates the fields of the bookmark in the bookmarks', () => {
         expect(bookmarks.bookmarks[0].fields).toBe(fields);

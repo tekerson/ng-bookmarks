@@ -49,6 +49,8 @@
     "lodash": "~3.9.3",
     "main-bower-files": "~2.8.0",
     "merge-stream": "~0.1.7",
+    "phantomjs-polyfill": "0.0.1",
+    "q": "^1.4.1",
     "require-dir": "~0.3.0",
     "tek": "file:src/lib/tek",
     "uglify-save-license": "~0.4.1",
