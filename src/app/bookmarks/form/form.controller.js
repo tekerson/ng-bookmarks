@@ -1,50 +1,39 @@
 import * as Fields from '../bookmark/fields';
 
-export default class FormCtrl {
-  constructor (bookmarksService, selectService, scope) {
-    this.bookmarkService = bookmarksService;
-    this.selectService = selectService;
+export default function FormCtrl(bookmarks, selector, scope) {
 
-    scope.$watch(() => selectService.selected, selected => {
-      if (selected === undefined) {
-        this.bookmark = mkEmptyFields();
-      } else {
-        this.bookmark = selected.fields.toObject();
-      }
-    });
-  }
+  scope.$watch(() => selector.selected, selected => {
+    if (selected === undefined) {
+      this.bookmark = undefined;
+    } else {
+      this.bookmark = selected.fields.toObject();
+    }
+  });
 
-  submit (form) {
+  this.submit = (form) => {
     if (!form.$valid) {
       return;
     }
 
     let result;
     let fields = Fields.fromObject(this.bookmark);
-    if (this.selectService.selected) {
-      result = this.bookmarkService.update(this.selectService.selected.id, fields);
+    if (selector.selected) {
+      result = bookmarks.update(selector.selected.id, fields);
     } else {
-      result = this.bookmarkService.create(fields);
+      result = bookmarks.create(fields);
     }
 
     result.then(() => this.cancel(form));
-  }
-
-  cancel (form) {
-    this.selectService.deselect();
-    this.bookmark = mkEmptyFields();
-    form.$setPristine();
-  }
-
-  showErrors (form, field) {
-    return (form.$submitted || field.$dirty) && field.$invalid;
-  }
-}
-
-function mkEmptyFields () {
-  return {
-    'title': Fields.Title.fromString(''),
-    'url': Fields.Url.fromString(''),
-    'description': Fields.Description.fromString('')
   };
+
+  this.cancel = (form) => {
+    selector.deselect();
+    this.bookmark = undefined;
+    form.$setPristine();
+  };
+
+  this.showErrors = (form, field) => {
+    return (form.$submitted || field.$dirty) && field.$invalid;
+  };
+
 }

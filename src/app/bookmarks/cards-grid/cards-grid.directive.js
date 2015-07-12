@@ -6,7 +6,8 @@ export default function CardsGridDirective() {
     controller: ['bookmarksService', 'bookmarksSelector', CardsGridCtrl],
 
     scope: {
-      bookmarks: '='
+      bookmarks: '=',
+      selected: '='
     },
     controllerAs: 'vm'
   };

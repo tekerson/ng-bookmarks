@@ -5,15 +5,9 @@ export default function CardsGridCtrl(bookmarks, selector) {
     this.isReversed = !this.isReversed;
   };
 
-  this.refresh = () => {
-    bookmarks.list();
-  };
+  this.refresh = bookmarks.list;
+  this.remove = bookmarks.remove;
 
-  this.remove = (id) => {
-    bookmarks.remove(id);
-  };
-
-  this.select = (bookmark) => {
-    selector.select(bookmark);
-  };
+  this.select = selector.select;
+  this.isSelected = selector.isSelected;
 }
