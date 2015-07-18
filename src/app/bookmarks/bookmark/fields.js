@@ -1,14 +1,23 @@
-import _ from 'lodash';
-
 import * as Url from './url';
 import * as Title from './title';
 import * as Description from './description';
-import validators from './validators';
-import { errors } from 'tek/validate';
-export { Url, Title, Description, validators };
+
+export { Url, Title, Description };
 
 class BookmarkFields {
   constructor(url, title, description) {
+    if (!Url.assertType(url)) {
+      throw new TypeError('Expected:Url');
+    }
+
+    if (!Title.assertType(title)) {
+      throw new TypeError('Expected:Title');
+    }
+
+    if (!(description === null || Description.assertType(description))) {
+      throw new TypeError('Expected:Description');
+    }
+
     this.url = url;
     this.title = title;
     this.description = description;
@@ -29,30 +38,14 @@ class BookmarkFields {
 
 }
 
-function mkBookmarkFields(url, title, description) {
-  if (!Url.assertType(url) || !_.isEmpty(errors(validators.url, url))) {
-    return new TypeError('Expected:Url');
-  }
-
-  if (!Title.assertType(title) || !_.isEmpty(errors(validators.title, title))) {
-    return new TypeError('Expected:Title');
-  }
-
-  if (!Description.assertType(description) || !_.isEmpty(errors(validators.description, description))) {
-    return new TypeError('Expected:Description');
-  }
-
-  return new BookmarkFields(url, title, description);
-}
-
 export var fromObject = obj =>
-  mkBookmarkFields(obj.url, obj.title, obj.description);
+  new BookmarkFields(obj.url, obj.title, obj.description);
 
 export var fromJSON = obj =>
-  mkBookmarkFields(
-    Url.fromString(obj.url),
-    Title.fromString(obj.title),
-    Description.fromString(obj.description));
+  new BookmarkFields(
+    Url.fromJSON(obj.url),
+    Title.fromJSON(obj.title),
+    obj.description === null ? null : Description.fromJSON(obj.description));
 
 export function assertType(obj) {
   return obj instanceof BookmarkFields;

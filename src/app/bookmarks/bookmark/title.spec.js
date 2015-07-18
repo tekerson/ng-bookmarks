@@ -11,14 +11,9 @@ describe('The `title` module', () => {
     expect(Title.assertType('Not a title')).toBeFalsy();
   });
 
-  it('will return an Error when a value cannot be created', () => {
-    expect(Title.fromString(123)).toBeError('Expected:String');
+  it('will throw a TypeError when constructed with a non-string', () => {
+    expect(() => Title.fromString(123)).toThrow(new TypeError('Expected:String'));
   });
-
-  it('will return an Error when a value cannot be created', () => {
-    expect(Title.fromString(123)).toBeError('Expected:String');
-  });
-
 });
 
 describe('A `Title` Value Object', () => {

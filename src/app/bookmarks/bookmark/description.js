@@ -2,6 +2,13 @@ import _ from 'lodash';
 
 class Description {
   constructor(description) {
+    if (!_.isString(description)) {
+      throw new TypeError('Expected:String');
+    }
+    if (description.length < 10) {
+      return new TooShortError(description.length);
+    }
+
     this.description = description;
     return Object.freeze(this);
   }
@@ -15,12 +22,19 @@ class Description {
   }
 }
 
+export class DescriptionError extends Error {}
+
+export class ConstructError extends DescriptionError {}
+export class TooShortError extends ConstructError {}
+
 export function fromString(value) {
   if (!_.isString(value)) {
-    return new TypeError('Expected:String');
+    throw new TypeError('Expected:String');
   }
   return new Description(value);
 }
+
+export var fromJSON = fromString;
 
 export function assertType(obj) {
   return obj instanceof Description;

@@ -10,31 +10,31 @@ describe('The `fields` module', () => {
     expect(Fields.assertType('Not Fields')).toBeFalsy();
   });
 
-  it('will return a TypeError when a constructed without a valid Url', () => {
-    let fields = Fields.fromObject({
+  it('will throw a TypeError when constructed without a Url', () => {
+    let input = {
       url: 'NotAUrl',
       title: Title.fromString('A Valid Title'),
       description: Description.fromString('This is a valid description')
-    });
-    expect(fields).toBeError('Expected:Url');
+    };
+    expect(() => Fields.fromObject(input)).toThrow(new TypeError('Expected:Url'));
   });
 
   it('will return a TypeError when a constructed without a valid Title', () => {
-    let fields = Fields.fromObject({
+    let input = ({
       url: Url.fromString('http://example.com'),
       title: 'NotATitle',
       description: Description.fromString('This is a valid description')
     });
-    expect(fields).toBeError('Expected:Title');
+    expect(() => Fields.fromObject(input)).toThrow(new TypeError('Expected:Title'));
   });
 
   it('will return a TypeError when a constructed without a valid Title', () => {
-    let fields = Fields.fromObject({
+    let input = ({
       url: Url.fromString('http://example.com'),
       title: Title.fromString('A Valid Title'),
       description: 'NotADescription'
     });
-    expect(fields).toBeError('Expected:Description');
+    expect(() => Fields.fromObject(input)).toThrow(new TypeError('Expected:Description'));
   });
 
   it('will return a Fields when created with valid parameters', () => {

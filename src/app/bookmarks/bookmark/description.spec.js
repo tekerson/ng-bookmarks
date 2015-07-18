@@ -11,8 +11,8 @@ describe('The `description` module', () => {
     expect(Description.assertType('Not a description')).toBeFalsy();
   });
 
-  it('will return an Error when a value cannot be created', () => {
-    expect(Description.fromString(123)).toBeError('Expected:String');
+  it('will will throw a TypeError when created with a non-string', () => {
+    expect(() => Description.fromString(123)).toThrow(new TypeError('Expected:String'));
   });
 
 });
