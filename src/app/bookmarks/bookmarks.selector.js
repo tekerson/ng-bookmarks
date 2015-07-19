@@ -12,4 +12,12 @@ export default function BookmarksSelector() {
   this.isSelected = (bookmark) => {
     return this.selected === bookmark;
   };
+
+  this.withSelected = (whenSelected, whenEmpty) => {
+    if (this.selected === undefined) {
+      return whenEmpty();
+    }
+    return whenSelected(this.selected);
+  };
+
 }

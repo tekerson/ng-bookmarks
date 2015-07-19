@@ -23,6 +23,12 @@ describe('The bookmark selector service', () => {
       expect(selector.isSelected(notSelected)).toBe(false);
     });
 
+    it('calls the `whenSelected` callback to `withSelected` with the selected bookmark', () => {
+      let retVal = { arbitrary: 'value' };
+      let whenSelected = (v) => [v, retVal];
+      expect(selector.withSelected(whenSelected, undefined)).toEqual([selected, retVal]);
+    });
+
     describe('when a bookmark is deselected', () => {
       beforeEach(() => {
         selector.deselect();
@@ -31,6 +37,12 @@ describe('The bookmark selector service', () => {
       it('does NOT remember previously selected object', () => {
         expect(selector.selected).toBe(undefined);
         expect(selector.isSelected(selected)).toBe(false);
+      });
+
+      it('calls the `whenEmpty` callback to `withSelected`', () => {
+        let retVal = { arbitrary: 'value' };
+        let whenEmpty = () => retVal;
+        expect(selector.withSelected(undefined, whenEmpty)).toEqual(retVal);
       });
     });
   });

@@ -2,33 +2,29 @@ import * as Fields from '../bookmark/fields';
 
 export default function FormCtrl(bookmarks, selector, scope) {
 
-  scope.$watch(() => selector.selected, selected => {
-    if (selected === undefined) {
-      this.bookmark = undefined;
-    } else {
-      this.bookmark = selected.fields.toObject();
-    }
-  });
+  let editSelected = () => {
+    this.bookmark = selector.withSelected(
+      (selected) => selected.fields.toObject(),
+      () => ({ description: null }));
+  };
+
+  scope.$watch(() => selector.selected, editSelected);
 
   this.submit = (form) => {
     if (!form.$valid) {
       return;
     }
 
-    let result;
     let fields = Fields.fromObject(this.bookmark);
-    if (selector.selected) {
-      result = bookmarks.update(selector.selected.id, fields);
-    } else {
-      result = bookmarks.create(fields);
-    }
-
-    result.then(() => this.cancel(form));
+    selector.withSelected(
+        (selected) => bookmarks.update(selected.id, fields),
+        () => bookmarks.create(fields))
+      .then(() => this.cancel(form));
   };
 
   this.cancel = (form) => {
     selector.deselect();
-    this.bookmark = undefined;
+    editSelected();
     form.$setPristine();
   };
 
