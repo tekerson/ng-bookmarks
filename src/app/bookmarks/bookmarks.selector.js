@@ -1,23 +1,25 @@
 export default function BookmarksSelector() {
-  this.selected = undefined;
+  let selected;
+
+  this.selected = () => selected;
 
   this.select = (bookmark) => {
-    this.selected = bookmark;
+    selected = bookmark;
   };
 
   this.deselect = () => {
-    this.selected = undefined;
+    selected = undefined;
   };
 
   this.isSelected = (bookmark) => {
-    return this.selected === bookmark;
+    return selected === bookmark;
   };
 
   this.withSelected = (whenSelected, whenEmpty) => {
-    if (this.selected === undefined) {
+    if (selected === undefined) {
       return whenEmpty();
     }
-    return whenSelected(this.selected);
+    return whenSelected(selected);
   };
 
 }

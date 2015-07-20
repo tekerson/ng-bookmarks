@@ -8,7 +8,7 @@ export default function FormCtrl(bookmarks, selector, scope) {
       () => ({ description: null }));
   };
 
-  scope.$watch(() => selector.selected, editSelected);
+  scope.$watch(selector.selected, editSelected);
 
   this.submit = (form) => {
     if (!form.$valid) {

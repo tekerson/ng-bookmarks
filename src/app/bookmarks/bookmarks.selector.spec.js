@@ -14,7 +14,7 @@ describe('The bookmark selector service', () => {
     });
 
     it('remembers the selected object', () => {
-      expect(selector.selected).toBe(selected);
+      expect(selector.selected()).toBe(selected);
       expect(selector.isSelected(selected)).toBe(true);
     });
 
@@ -35,7 +35,7 @@ describe('The bookmark selector service', () => {
       });
 
       it('does NOT remember previously selected object', () => {
-        expect(selector.selected).toBe(undefined);
+        expect(selector.selected()).toBe(undefined);
         expect(selector.isSelected(selected)).toBe(false);
       });
 
