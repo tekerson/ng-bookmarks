@@ -18,7 +18,7 @@ describe('The Bookmarks service', () => {
     });
 
     it('there are no bookmarks', () => {
-      expect(bookmarks.bookmarks).toEqual([]);
+      expect(bookmarks.bookmarks()).toEqual([]);
     });
 
     describe('creating a bookmark', () => {
@@ -30,7 +30,7 @@ describe('The Bookmarks service', () => {
       });
 
       it('adds the bookmark to the bookmarks', () => {
-        expect(bookmarks.bookmarks[0].fields).toBe(fields);
+        expect(bookmarks.bookmarks()[0].fields).toBe(fields);
       });
     });
   });
@@ -45,7 +45,7 @@ describe('The Bookmarks service', () => {
     });
 
     it('there are bookmarks', () => {
-      expect(bookmarks.bookmarks).toContain(bookmark);
+      expect(bookmarks.bookmarks()).toContain(bookmark);
     });
 
     describe('removing a bookmark', () => {
@@ -54,7 +54,7 @@ describe('The Bookmarks service', () => {
       });
 
       it('removes it from the bookmarks', () => {
-        expect(bookmarks.bookmarks).not.toContain(bookmark);
+        expect(bookmarks.bookmarks()).not.toContain(bookmark);
       });
     });
 
@@ -65,7 +65,7 @@ describe('The Bookmarks service', () => {
         bookmarks.update(bookmark.id, fields).done(done);
       });
       it('updates the fields of the bookmark in the bookmarks', () => {
-        expect(bookmarks.bookmarks[0].fields).toBe(fields);
+        expect(bookmarks.bookmarks()[0].fields).toBe(fields);
       });
     });
   });

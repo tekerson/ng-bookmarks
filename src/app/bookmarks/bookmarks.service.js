@@ -1,28 +1,30 @@
 import _ from 'lodash';
 
 export default function BookmarksService(api) {
-  this.bookmarks = [];
+  let bookmarks = [];
+
+  this.bookmarks = () => bookmarks;
 
   this.list = () =>
     api.list().then(bms => {
-      this.bookmarks = bms;
+      bookmarks = bms;
     });
 
   this.remove = (id) =>
     api.remove(id).then(() => {
-      _.remove(this.bookmarks, {id: id});
+      _.remove(bookmarks, {id: id});
     });
 
   this.create = fields =>
     api.create(fields).then(result => {
-      _.remove(this.bookmarks, {id: result.id});
-      this.bookmarks.push(result);
+      _.remove(bookmarks, {id: result.id});
+      bookmarks.push(result);
     });
 
   this.update = (id, fields) =>
     api.update(id, fields).then(result => {
-      _.remove(this.bookmarks, {id: result.id});
-      this.bookmarks.push(result);
+      _.remove(bookmarks, {id: result.id});
+      bookmarks.push(result);
     });
 
 }
