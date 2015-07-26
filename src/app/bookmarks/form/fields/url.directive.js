@@ -18,7 +18,7 @@ export default function fieldUrlDirective() {
         (value === null) || !(value instanceof Url.InvalidProtocolError);
 
       ctrl.$formatters.push(value =>
-        Url.assertType(value) ? value.toString() : '');
+        Url.isInstance(value) ? value.toString() : '');
     }
   };
 }

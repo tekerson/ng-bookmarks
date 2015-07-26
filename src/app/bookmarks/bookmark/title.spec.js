@@ -4,11 +4,11 @@ describe('The `title` module', () => {
 
   it('will assert the type of an `Title` value', () => {
     let title = Title.fromString('This is a title');
-    expect(Title.assertType(title)).toBeTruthy();
+    expect(Title.isInstance(title)).toBeTruthy();
   });
 
   it('will not assert the type of a non-`Title` value', () => {
-    expect(Title.assertType('Not a title')).toBeFalsy();
+    expect(Title.isInstance('Not a title')).toBeFalsy();
   });
 
   it('will throw a TypeError when constructed with a non-string', () => {

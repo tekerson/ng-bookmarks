@@ -4,11 +4,11 @@ describe('The `id` module', () => {
 
   it('will assert the type of an `Id` value', () => {
     let id = Id.fromString('123');
-    expect(Id.assertType(id)).toBeTruthy();
+    expect(Id.isInstance(id)).toBeTruthy();
   });
 
   it('will not assert the type of a non-`Id` value', () => {
-    expect(Id.assertType('123')).toBeFalsy();
+    expect(Id.isInstance('123')).toBeFalsy();
   });
 
   it('will return an Error when a value cannot be created', () => {

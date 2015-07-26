@@ -12,7 +12,7 @@ class BookmarkFields {
   }
 
   set url(url) {
-    if (!Url.assertType(url)) {
+    if (!Url.isInstance(url)) {
       throw new TypeError('Expected:Url');
     }
 
@@ -24,7 +24,7 @@ class BookmarkFields {
   }
 
   set title(title) {
-    if (!Title.assertType(title)) {
+    if (!Title.isInstance(title)) {
       throw new TypeError('Expected:Title');
     }
 
@@ -36,7 +36,7 @@ class BookmarkFields {
   }
 
   set description(description) {
-    if (!(description === null || Description.assertType(description))) {
+    if (!(description === null || Description.isInstance(description))) {
       throw new TypeError('Expected:Description');
     }
 
@@ -70,6 +70,6 @@ export var fromJSON = obj =>
     Title.fromJSON(obj.title),
     obj.description === null ? null : Description.fromJSON(obj.description));
 
-export function assertType(obj) {
+export function isInstance(obj) {
   return obj instanceof BookmarkFields;
 }

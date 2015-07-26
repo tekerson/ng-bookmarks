@@ -43,6 +43,6 @@ export var fromJSON = fromString;
 export class ParseError extends UrlError {}
 export class NoDomainError extends ParseError {}
 
-export function assertType(obj) {
+export function isInstance(obj) {
   return obj instanceof Url;
 }

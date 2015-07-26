@@ -15,7 +15,7 @@ export default function fieldTitleDirective() {
         (value === null) || !(value instanceof Title.NoInitCapError);
 
       ctrl.$formatters.push(value =>
-        Title.assertType(value) ? value.toString() : '');
+        Title.isInstance(value) ? value.toString() : '');
     }
   };
 }

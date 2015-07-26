@@ -4,11 +4,11 @@ describe('The `url` module', () => {
 
   it('will assert the type of an `Url` value', () => {
     let url = Url.fromString('http://example.com');
-    expect(Url.assertType(url)).toBeTruthy();
+    expect(Url.isInstance(url)).toBeTruthy();
   });
 
   it('will not assert the type of a non-`Url` value', () => {
-    expect(Url.assertType('Not a url')).toBeFalsy();
+    expect(Url.isInstance('Not a url')).toBeFalsy();
   });
 
   it('will throw a TypeError when constructed with a non-string', () => {

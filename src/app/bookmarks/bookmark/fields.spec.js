@@ -7,7 +7,7 @@ import * as Description from './description';
 describe('The `fields` module', () => {
 
   it('will not assert the type of a non-`Fields` value', () => {
-    expect(Fields.assertType('Not Fields')).toBeFalsy();
+    expect(Fields.isInstance('Not Fields')).toBeFalsy();
   });
 
   it('will throw a TypeError when constructed without a Url', () => {
@@ -43,7 +43,7 @@ describe('The `fields` module', () => {
       url: Url.fromString('http://example.com'),
       description: Description.fromString('This is a valid description')
     });
-    expect(Fields.assertType(fields)).toBeTruthy();
+    expect(Fields.isInstance(fields)).toBeTruthy();
   });
 
   it('will return a Fields when created with valid JSON', () => {
@@ -52,7 +52,7 @@ describe('The `fields` module', () => {
       url: 'http://example.com',
       description: 'This is a valid description'
     });
-    expect(Fields.assertType(fields)).toBeTruthy();
+    expect(Fields.isInstance(fields)).toBeTruthy();
   });
 
 });

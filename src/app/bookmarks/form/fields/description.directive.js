@@ -13,7 +13,7 @@ export default function fieldDescriptionDirective() {
         (value === null) || !(value instanceof Description.TooShortError);
 
       ctrl.$formatters.push(value =>
-        Description.assertType(value) ? value.toString() : '');
+        Description.isInstance(value) ? value.toString() : '');
     }
   };
 }

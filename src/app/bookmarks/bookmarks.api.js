@@ -5,7 +5,7 @@ export default function BookmarksApiService(Restangular, $q) {
 
   this.list = () =>
     api.getList()
-      .then(rows => rows.map(Bookmark.fromJSON).filter(Bookmark.assertType));
+      .then(rows => rows.map(Bookmark.fromJSON).filter(Bookmark.isInstance));
 
   this.remove = (id) =>
     api.one(id).remove();

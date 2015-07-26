@@ -3,11 +3,11 @@ import * as Fields from './fields';
 
 class Bookmark {
   constructor(id, fields) {
-    if (!Id.assertType(id)) {
+    if (!Id.isInstance(id)) {
       return new TypeError('Expected:Id');
     }
 
-    if (!Fields.assertType(fields)) {
+    if (!Fields.isInstance(fields)) {
       return new TypeError('Expected:Fields');
     }
 
@@ -27,6 +27,6 @@ export function fromObject(obj) {
   return new Bookmark(obj.id, obj.fields);
 }
 
-export function assertType(obj) {
+export function isInstance(obj) {
   return obj instanceof Bookmark;
 }

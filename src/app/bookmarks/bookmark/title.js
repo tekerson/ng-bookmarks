@@ -37,6 +37,6 @@ export function fromString(value) {
 
 export var fromJSON = fromString;
 
-export function assertType(obj) {
+export function isInstance(obj) {
   return obj instanceof Title;
 }

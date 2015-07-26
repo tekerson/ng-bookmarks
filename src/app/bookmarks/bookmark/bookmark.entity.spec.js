@@ -10,7 +10,7 @@ import * as Description from './description';
 describe('The `bookmarks.entity` module', () => {
 
   it('will not assert the type of a non-`Bookmark` value', () => {
-    expect(Bookmark.assertType('Not a Bookmark')).toBeFalsy();
+    expect(Bookmark.isInstance('Not a Bookmark')).toBeFalsy();
   });
 
   it('will return a TypeError when a constructed without a valid Id', () => {
@@ -38,7 +38,7 @@ describe('The `bookmarks.entity` module', () => {
         description: Description.fromString('This is a valid description')
       })
     });
-    expect(Bookmark.assertType(bookmark)).toBeTruthy();
+    expect(Bookmark.isInstance(bookmark)).toBeTruthy();
   });
 
   it('will return a Bookmark entity when created with valid JSON', () => {
@@ -48,7 +48,7 @@ describe('The `bookmarks.entity` module', () => {
       url: 'http://example.com',
       description: 'This is a valid description'
     });
-    expect(Bookmark.assertType(bookmark)).toBeTruthy();
+    expect(Bookmark.isInstance(bookmark)).toBeTruthy();
   });
 
 });
