@@ -6,22 +6,45 @@ export { Url, Title, Description };
 
 class BookmarkFields {
   constructor(url, title, description) {
+    this.url = url;
+    this.title = title;
+    this.description = description;
+  }
+
+  set url(url) {
     if (!Url.assertType(url)) {
       throw new TypeError('Expected:Url');
     }
 
+    this._url = url;
+  }
+
+  get url() {
+    return this._url;
+  }
+
+  set title(title) {
     if (!Title.assertType(title)) {
       throw new TypeError('Expected:Title');
     }
 
+    this._title = title;
+  }
+
+  get title() {
+    return this._title;
+  }
+
+  set description(description) {
     if (!(description === null || Description.assertType(description))) {
       throw new TypeError('Expected:Description');
     }
 
-    this.url = url;
-    this.title = title;
-    this.description = description;
-    return Object.freeze(this);
+    this._description = description;
+  }
+
+  get description() {
+    return this._description;
   }
 
   toObject() {
