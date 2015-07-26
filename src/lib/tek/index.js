@@ -1,1 +1,1 @@
-import ./validate
+import './validate';

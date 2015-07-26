@@ -17,6 +17,7 @@ function listFiles() {
       path.join(conf.paths.src, '/../node_modules/phantomjs-polyfill/bind-polyfill.js'),
       path.join(conf.paths.tmp, '/serve/app/index.module.js'),
       path.join(conf.paths.src, '/lib/test/jasmine_matchers.js'),
+      path.join(conf.paths.src, '/lib/polyfill/index.js'),
       path.join(conf.paths.src, '/**/*.spec.js'),
       path.join(conf.paths.src, '/**/*.html')
     ]);
@@ -63,7 +64,9 @@ module.exports = function(config) {
     preprocessors: {
       'src/**/*.html': ['ng-html2js'],
       'src/**/*.spec.js': ['webpack', 'sourcemap'],
-      'src/**/*.mock.js': ['webpack', 'sourcemap']
+      'src/**/*.mock.js': ['webpack', 'sourcemap'],
+      'src/lib/test/*.js': ['webpack', 'sourcemap'],
+      'src/lib/polyfill/*.js': ['webpack', 'sourcemap']
     }
   };
 

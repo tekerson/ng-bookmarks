@@ -1,5 +1,8 @@
 class Id {
   constructor(id) {
+    if (!Number.isInteger(id)) {
+      throw new Error('Expected:Integer');
+    }
     this.id = id;
     return Object.freeze(this);
   }
@@ -11,15 +14,28 @@ class Id {
   toString() {
     return this.id.toString();
   }
+
+  equals(other) {
+    return this.id === other.id;
+  }
+}
+
+export function fromNumber(value) {
+  if (!Number.isInteger(value)) {
+    return new Error('Invalid:NonInteger');
+  }
+  return new Id(value);
 }
 
 export function fromString(value) {
-  let id = parseInt(value, 10);
+  let id = parseFloat(value);
   if (isNaN(id)) {
-    return new Error('Invalid:NotNumeric');
+    return new Error('Invalid:NonNumeric');
   }
-  return new Id(id);
+  return fromNumber(id);
 }
+
+export var fromJSON = fromNumber;
 
 export function assertType(obj) {
   return obj instanceof Id;

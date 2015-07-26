@@ -1,4 +1,5 @@
 /* global moment:false */
+import '../lib/polyfill';
 import config from './index.config';
 
 import routerConfig from './index.route';

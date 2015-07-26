@@ -12,7 +12,8 @@ describe('The `id` module', () => {
   });
 
   it('will return an Error when a value cannot be created', () => {
-    expect(Id.fromString('abc')).toBeError('Invalid:NotNumeric');
+    expect(Id.fromString('abc')).toBeError('Invalid:NonNumeric');
+    expect(Id.fromString('1.2')).toBeError('Invalid:NonInteger');
   });
 
 });
