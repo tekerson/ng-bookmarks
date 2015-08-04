@@ -1,22 +1,11 @@
-<button class="refresh-btn" ng-click="vm.refresh()"></button>
-<button class="reverse-btn" ng-click="vm.reverse()"></button>
+<button class="refresh-btn" ng-click="vm.onRefreshClick()"></button>
+<button class="reverse-btn" ng-click="vm.onReverseClick()"></button>
 <div class="bookmark-card-list">
-  <div ng-if="!bookmarks.length">No Bookmarks Found</div>
-  <div class="bookmark-card"
-       ng-repeat="bookmark in bookmarks
-                 | orderBy:'fields.title':vm.isReversed() track by bookmark.id"
-       ng-class="{ 'selected': vm.isSelected(bookmark) }">
-    <div class="content">
-      <button class="delete-btn" ng-click="vm.remove(bookmark.id)"></button>
-      <button class="edit-btn" ng-click="vm.select(bookmark)"></button>
-      <h3>
-        <span class="list-index" ng-bind="$index + 1"></span>
-        {{bookmark.fields.title.toString()}}
-      </h3>
-      <p ng-bind="bookmark.fields.description">??</p>
-      <p>
-      <a ng-href="{{bookmark.fields.url.toString()}}"
-        ng-bind="bookmark.fields.url">??</a></p>
-    </div>
-  </div>
+  <div ng-if="!vm.bookmarks().length">No Bookmarks Found</div>
+  <bm-card ng-repeat="bookmark in vm.bookmarks() track by bookmark.id"
+           index="$index"
+           bookmark="bookmark"
+           on-select-click="vm.selectBookmark(bookmark)"
+           on-delete-click="vm.deleteBookmark(bookmark)"
+           is-selected="bookmark === vm.selected"></bm-card>
 </div>

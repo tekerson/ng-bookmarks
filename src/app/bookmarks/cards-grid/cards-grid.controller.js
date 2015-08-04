@@ -1,15 +1,22 @@
+import _ from 'lodash';
+
 export default function CardsGridCtrl(bookmarks, selector) {
   let reversed = false;
 
-  this.isReversed = () => reversed;
-
-  this.reverse = () => {
+  this.onReverseClick = () => {
     reversed = !reversed;
   };
 
-  this.refresh = bookmarks.list;
-  this.remove = bookmarks.remove;
+  this.bookmarks = () => {
+    let bms = _(this.bms)
+      .sortBy((bm) => bm.fields.title);
+    return (reversed ? bms.reverse() : bms).value();
+  };
 
-  this.select = selector.select;
-  this.isSelected = selector.isSelected;
+  this.onRefreshClick = bookmarks.list;
+
+  this.deleteBookmark = (bookmark) =>
+    bookmarks.remove(bookmark.id);
+
+  this.selectBookmark = selector.select;
 }

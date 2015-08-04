@@ -5,6 +5,7 @@ import SelectorService from './bookmarks.selector';
 import Api from './bookmarks.api';
 
 import CardsGridDirective from './cards-grid/cards-grid.directive';
+import CardDirective from './cards-grid/card.directive';
 import CountDirective from './count/count.directive';
 import FormDirective from './form/form.directive';
 
@@ -28,9 +29,11 @@ export default angular.module('bookmarks', ['restangular', 'ngMessages'])
     Restangular.setBaseUrl('http://localhost:3002');
   }])
 
-  .controller('BookmarksController', ['bookmarksService', BookmarksController])
+  .controller('BookmarksController',
+      ['bookmarksService', 'bookmarksSelector', BookmarksController])
 
   .directive('bmCards', CardsGridDirective)
+  .directive('bmCard', CardDirective)
   .directive('bmCount', CountDirective)
   .directive('bmForm', FormDirective)
 
