@@ -1,6 +1,5 @@
 import CardsGridCtrl from './cards-grid.controller';
 
-import * as Id from '../bookmark/id';
 import * as Bookmark from '../bookmark/bookmark.entity';
 
 describe('The `CardsGrid` controller', () => {
@@ -14,34 +13,62 @@ describe('The `CardsGrid` controller', () => {
     ctrl = new CardsGridCtrl(bookmarks, selector);
   });
 
-  it('is not reversed by default', () => {
-    expect(ctrl.isReversed()).toBe(false);
-  });
+  describe('displays a grid of bookmarks', () => {
+    beforeEach(() => {
+      bookmarks.list.and.returnValue([
+        Bookmark.fromJSON({
+          "id": 1,
+          "url": "http://b.example.com/",
+          "title": "B - Second",
+          "description": "This is a description"
+        }),
+        Bookmark.fromJSON({
+          "id": 2,
+          "url": "http://a.example.com/",
+          "title": "A - First",
+          "description": "This is a description"
+        })
+      ]);
+    });
 
-  it('changes to reversed when `reverse` is called', () => {
-    ctrl.reverse();
+    let isReversed = (bookmarks) => {
+      return bookmarks[0].fields.title.title > bookmarks[1].fields.title.title;
+    };
 
-    expect(ctrl.isReversed()).toBe(true);
-  });
+    it('is not reversed by default', () => {
+      expect(isReversed(ctrl.bookmarks())).toBe(false);
+    });
 
-  it('alternates back to not reversed', () => {
-    ctrl.reverse();
-    ctrl.reverse();
+    it('changes to reversed when `reverse` is called', () => {
+      ctrl.onReverseClick();
 
-    expect(ctrl.isReversed()).toBe(false);
+      expect(isReversed(ctrl.bookmarks())).toBe(true);
+    });
+
+    it('alternates back to not reversed', () => {
+      ctrl.onReverseClick();
+      ctrl.onReverseClick();
+
+      expect(isReversed(ctrl.bookmarks())).toBe(false);
+    });
   });
 
   it('refreshes the bookmarks', () => {
-    ctrl.refresh();
+    ctrl.onRefreshClick();
 
     expect(bookmarks.list).toHaveBeenCalled();
   });
 
   it('removes bookmarks by ID', () => {
-    let id = Id.fromString('123');
-    ctrl.remove(id);
+    let bookmark = Bookmark.fromJSON({
+      "id": 123,
+      "url": "http://bar.com/",
+      "title": "Foo",
+      "description": "This is a description"
+    });
+    ctrl.deleteBookmark(bookmark);
 
-    expect(bookmarks.remove).toHaveBeenCalledWith(id);
+    expect(bookmarks.remove).toHaveBeenCalledWith(bookmark.id);
   });
 
   it('selects bookmarks', () => {
@@ -51,7 +78,7 @@ describe('The `CardsGrid` controller', () => {
       "title": "Foo",
       "description": "This is a description"
     });
-    ctrl.select(bookmark);
+    ctrl.selectBookmark(bookmark);
 
     expect(selector.select).toHaveBeenCalledWith(bookmark);
   });

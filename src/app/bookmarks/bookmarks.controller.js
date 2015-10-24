@@ -3,5 +3,13 @@ export default class BookmarksController {
     bookmarkService.list();
     this.bookmarks = bookmarkService;
     this.selector = selectorService;
+
+    this.deleteBookmark = (bookmark) => {
+      bookmarkService.remove(bookmark.id);
+    };
+
+    this.selectBookmark = (bookmark) => {
+      selectorService.select(bookmark);
+    };
   }
 }

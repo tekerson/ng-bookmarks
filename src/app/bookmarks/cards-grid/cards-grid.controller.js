@@ -8,7 +8,7 @@ export default function CardsGridCtrl(bookmarks, selector) {
   };
 
   this.bookmarks = () => {
-    let bms = _(this.bms)
+    let bms = _(bookmarks.list())
       .sortBy((bm) => bm.fields.title);
     return (reversed ? bms.reverse() : bms).value();
   };

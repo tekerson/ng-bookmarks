@@ -1,5 +1,8 @@
 <layout-shell>
   <bm-count bookmarks="vm.bookmarks.bookmarks()"></bm-count>
-  <bm-cards bookmarks="vm.bookmarks.bookmarks()" selected="vm.selector.selected()"></bm-cards>
+  <bm-cards bookmarks="vm.bookmarks.bookmarks()"
+            selected="vm.selector.selected()"
+            on-delete-click="vm.deleteBookmark"
+            on-select-click="vm.selectBookmark"></bm-cards>
   <bm-form></bm-form>
 </layout-shell>
